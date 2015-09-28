@@ -20,4 +20,8 @@
 		Asteroids.MovingObject.prototype.draw.call(this, ctx);
 	};
 
+	MovingObject.Asteroid.prototype.isCollidedWith = function(otherObject){
+		Asteroids.MovingObject.prototype.isCollidedWith.call(this, otherObject); 
+	};
+
 })();

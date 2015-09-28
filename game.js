@@ -12,7 +12,6 @@
 	}; 
 
 	Game.prototype.addAsteroids = function() { 
-	// var pos = [ Math.floor(Math.random()*DIM_X) , Math.floor(Math.random()*DIM_Y)];
 	while (this.asteroids.length < NUM_ASTEROIDS){
 		var pos = [ Math.floor(Math.random()*DIM_X) , Math.floor(Math.random()*DIM_Y)];
 		this.asteroids.push(new MovingObject.Asteroid(pos)); 
@@ -45,6 +44,24 @@
 		});
 	};
 
+	Game.prototype.checkCollisions = function() { 
+		for (var i = 0; i < this.asteroids.length-1; i++){
+			for (var j = i + 1; j < this.asteroids.length; j++){
+				if (this.asteroids[i].isCollidedWith(this.asteroids[j])){
+					console.log("COLLISION");
+					this.asteroids.remove(i,j); 
+				}
+
+			}
+		}
+	};
+
+	Game.prototype.step = function() { 
+		this.moveObjects();
+		this.checkCollisions();
+	}
+
+
 
 
 //w hat's happening at edge of window? Why does it streak? 
@@ -53,4 +70,3 @@
 })();
 
 
-//why does changing NUM_ASTEROIDS only change speed? Why aren't i getting more objs? 

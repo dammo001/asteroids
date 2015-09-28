@@ -24,6 +24,8 @@
 		 };
 
 	MovingObject.prototype.move = function(){
+		// get help refactoring this !! setting x,y locks value... get explanation in terms of scope 
+
 		// var x = this.position[0];
 		// var y = this.position[1]; 
 		this.position[0] = this.position[0] + this.velocity[0];
@@ -39,6 +41,18 @@
 			this.position[1] = this.position[1] - 490;
 		}
 	};
+
+	MovingObject.prototype.isCollidedWith = function(otherObject){
+	if (Asteroids.Util.prototype.distance(this.position, otherObject.position) > (this.radius + otherObject.radius)){
+		return false;
+	}else {
+		return true;
+	}
+};
+
+
+
+	
 
 
 
