@@ -4,7 +4,7 @@
 	}
 	var DIM_X = 578; 
 		var DIM_Y = 200; 
-		var NUM_ASTEROIDS = 4;
+		var NUM_ASTEROIDS = 12;
 	
 
 	var Game = Asteroids.Game = function(){ 
@@ -24,7 +24,20 @@
 	this.asteroids.forEach(function(asteroid) { 
 		asteroid.draw(ctx);
 	});
-};
+};	
+
+	// Game.prototype.wrap = function(pos) { 
+	// 	if (pos[0] < 0){ 
+	// 		pos[0] = 720 - pos[0];
+	// 	} else if (pos[1] < 0){
+	// 			pos[1] = 490 - pos[1];
+	// 	} else if (pos[0] > 720){
+	// 		pos[0] = pos[0] - 720;
+
+	// 	} else if (pos[1] > 490){
+	// 		pos[1] = pos[1] - 490;
+	// 	}
+	// };
 
 	Game.prototype.moveObjects = function() { 
 	this.asteroids.forEach(function(asteroid) { 

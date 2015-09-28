@@ -24,9 +24,22 @@
 		 };
 
 	MovingObject.prototype.move = function(){
+		// var x = this.position[0];
+		// var y = this.position[1]; 
 		this.position[0] = this.position[0] + this.velocity[0];
+		if (this.position[0] < 0){
+			this.position[0] = 720 - this.position[0];
+		} else if (this.position[0] > 720){
+			this.position[0] = this.position[0] - 720;
+		}
 		this.position[1] = this.position[1] + this.velocity[1]; 
+		if (this.position[1] < 0){
+			this.position[1] = 490 - this.position[1]; 
+		} else if (this.position[1] > 490){
+			this.position[1] = this.position[1] - 490;
+		}
 	};
+
 
 
 })();
