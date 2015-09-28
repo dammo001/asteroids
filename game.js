@@ -9,6 +9,8 @@
 
 	var Game = Asteroids.Game = function(){ 
 		this.asteroids = [];
+		var pos = [ Math.floor(Math.random()*DIM_X) , Math.floor(Math.random()*DIM_Y)];
+		this.ship = new MovingObject.Ship(pos);
 	}; 
 
 	Game.prototype.addAsteroids = function() { 
@@ -20,7 +22,8 @@
 	Game.prototype.draw = function(ctx) {
 	ctx = ctx.getContext('2d'); 
 	ctx.clearRect(0,0,490,720); 
-	this.asteroids.forEach(function(asteroid) { 
+	// this.asteroids.forEach(function(asteroid) {
+	this.allObjects().forEach(function(asteroid) { 
 		asteroid.draw(ctx);
 	});
 };	
@@ -44,7 +47,13 @@
 		});
 	};
 
+	Game.prototype.allObjects = function() { 
+		var allObjs = this.asteroids.concat(this.ship);
+		return allObjs;
+	};
+
 	Game.prototype.checkCollisions = function() { 
+		// var allObjs = Game.prototype.allObjects()
 		for (var i = 0; i < this.asteroids.length-1; i++){
 			for (var j = i + 1; j < this.asteroids.length; j++){
 				if (this.asteroids[i].isCollidedWith(this.asteroids[j])){
