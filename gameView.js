@@ -12,6 +12,7 @@
 	gameView.prototype.start = function() { 
 		var game = this.game;
 		var ctx = this.ctx;
+		this.game.ship.bindKeyHandlers();
 		setInterval(function(){game.step(), game.draw(ctx)}.bind(game), 50);
 	}; 
 

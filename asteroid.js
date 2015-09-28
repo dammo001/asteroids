@@ -3,7 +3,7 @@
 		MovingObject = {}; 
 	}
 	var COLOR = 'green'; 
-	var RADIUS = '3'; 
+	var RADIUS = 3; 
 
 
 	var Asteroid = MovingObject.Asteroid = function(pos){
@@ -23,5 +23,6 @@
 	MovingObject.Asteroid.prototype.isCollidedWith = function(otherObject){
 		Asteroids.MovingObject.prototype.isCollidedWith.call(this, otherObject); 
 	};
+
 
 })();

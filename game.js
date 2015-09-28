@@ -4,7 +4,7 @@
 	}
 	var DIM_X = 578; 
 		var DIM_Y = 200; 
-		var NUM_ASTEROIDS = 12;
+		var NUM_ASTEROIDS = 20;
 	
 
 	var Game = Asteroids.Game = function(){ 
@@ -26,6 +26,10 @@
 	this.allObjects().forEach(function(asteroid) { 
 		asteroid.draw(ctx);
 	});
+	this.ship.bullets.forEach(function(bullet) { 
+		bullet.draw(ctx);
+	});
+	
 };	
 
 	// Game.prototype.wrap = function(pos) { 
@@ -42,38 +46,51 @@
 	// };
 
 	Game.prototype.moveObjects = function() { 
-	this.asteroids.forEach(function(asteroid) { 
+	this.allObjects().forEach(function(asteroid) { 
 		asteroid.move();
 		});
+	this.ship.bullets.forEach(function(bullet) {
+		bullet.move();
+	});
 	};
 
-	Game.prototype.allObjects = function() { 
-		var allObjs = this.asteroids.concat(this.ship);
+	Game.prototype.allObjects = function() {
+		allObjs = this.asteroids.concat(this.ship);
 		return allObjs;
 	};
 
 	Game.prototype.checkCollisions = function() { 
 		// var allObjs = Game.prototype.allObjects()
-		for (var i = 0; i < this.asteroids.length-1; i++){
-			for (var j = i + 1; j < this.asteroids.length; j++){
-				if (this.asteroids[i].isCollidedWith(this.asteroids[j])){
-					console.log("COLLISION");
-					this.asteroids.remove(i,j); 
-				}
-
+		for (var i = 0; i < this.allObjects().length-1; i++){
+			for (var j = i + 1; j < this.allObjects().length; j++){
+				if ((this.allObjects()[i].isCollidedWith(this.allObjects()[j])) && (this.allObjects()[i] === this.ship)){
+					this.ship.relocate();
+				} else if ((this.allObjects()[i].isCollidedWith(this.allObjects()[j])) && (this.allObjects()[j] === this.ship)){
+					this.ship.relocate();
 			}
 		}
-	};
+	}
+};
+	Game.prototype.checkBullets = function() { 
+		var bullets = this.ship.bullets;
+		var asteroids = this.allObjects();
+		for (var i = 0; i < bullets.length; i ++){
+			for (var j = 0; j < asteroids.length; j ++){
+				if (bullets[i].isCollidedWith(asteroids[j])){
+					asteroids.remove(j);
+				}
+			}
+		}};
 
 	Game.prototype.step = function() { 
 		this.moveObjects();
 		this.checkCollisions();
-	}
+	};
 
 
 
 
-//w hat's happening at edge of window? Why does it streak? 
+//what's happening at edge of window? Why does it streak? 
 //How can i make window bigger? 
 
 })();
